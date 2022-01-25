@@ -18,7 +18,7 @@ jobs:
       env:
         VSAC_API_KEY: ${{secrets.VSAC_API_KEY}}
     
-    - run: docker system prune -a 
+    - run: docker builder prune
 
     - run: docker volume prune 
 
