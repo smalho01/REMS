@@ -13,12 +13,14 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - run: 'echo "VSAC_API_KEY=$VSAC_API_KEY" > .env; echo "COMPOSE_PROJECT_NAME=rems_porter" >> .env; cat .env'
+    - run: 'echo "VSAC_API_KEY=$VSAC_API_KEY" > .env; echo "COMPOSE_PROJECT_NAME=rems_porter" >> .env'
       shell: bash
       env:
         VSAC_API_KEY: ${{secrets.VSAC_API_KEY}}
+    
+    - run: docker system prune -a 
 
-    - run: cat .env
+    - run: docker volume prune 
 
     - name: Install Porter
       run: curl -L https://cdn.porter.sh/canary/install-linux.sh | bash
@@ -28,8 +30,6 @@ jobs:
 
     - name: Install Porter Mixins
       run: porter mixins install docker; porter mixins install docker-compose
-    
-    - run: cat .env
 
     - name: Build Invocation Image
       run: porter build 
