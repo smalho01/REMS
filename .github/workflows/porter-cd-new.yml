@@ -1,12 +1,12 @@
-name: Porter Invocation Docker Image CD
+name: Porter Invocation Image CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ porter-test ]
   workflow_dispatch:
 
 jobs:
-  porter-cd:
+  new-porter-cd:
     runs-on: ubuntu-latest
     steps:
 
