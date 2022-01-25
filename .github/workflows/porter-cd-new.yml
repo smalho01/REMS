@@ -1,4 +1,4 @@
-name: Porter Invocation Docker Image CD
+name: Porter Invocation Image CD
 
 on:
   push:
@@ -6,20 +6,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  porter-cd:
+  new-porter-cd:
     runs-on: ubuntu-latest
     steps:
 
     - name: Checkout Repository
       uses: actions/checkout@v2
-      
-    - name: Find and Replace
-      uses: jacobtomlinson/gha-find-replace@v2
-      with:
-        include: "**.env"
-        find: "rems_dev"
-        replace: "rems_porter"
-        regex: false
+
+    - run: 'echo "VSAC_API_KEY=$VSAC_API_KEY" > .env; echo "COMPOSE_PROJECT_NAME=rems_porter" >> .env'
+      shell: bash
+      env:
+        VSAC_API_KEY: ${{secrets.VSAC_API_KEY}}
+    
+    - run: docker builder prune
+
+    - run: docker volume prune 
 
     - name: Install Porter
       run: curl -L https://cdn.porter.sh/canary/install-linux.sh | bash

@@ -46,3 +46,12 @@ uninstall:
         - docker-compose-porter.yml
         - down
         - --remove-orphans
+        
+customActions:
+stop:
+  - docker-compose:
+      description: Stop Running Application Images
+      arguments:
+        - -f 
+        - docker-compose-porter.yml
+        - stop
