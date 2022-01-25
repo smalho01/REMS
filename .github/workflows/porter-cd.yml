@@ -18,6 +18,8 @@ jobs:
       env:
         VSAC_API_KEY: ${{secrets.VSAC_API_KEY}}
 
+    - run: cat .env
+
     - name: Install Porter
       run: curl -L https://cdn.porter.sh/canary/install-linux.sh | bash
 
@@ -26,6 +28,8 @@ jobs:
 
     - name: Install Porter Mixins
       run: porter mixins install docker; porter mixins install docker-compose
+    
+    -run: cat .env
 
     - name: Build Invocation Image
       run: porter build 
