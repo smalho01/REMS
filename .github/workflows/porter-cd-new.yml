@@ -2,7 +2,7 @@ name: Porter Invocation Image CD
 
 on:
   push:
-    branches: [ porter-test ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
