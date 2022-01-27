@@ -23,6 +23,8 @@ build:
       description: "Docker build"
       outputs:
         - name: invocationImage
+      arguments:
+        - –-no-cache
 
 install:
   - docker-compose:
